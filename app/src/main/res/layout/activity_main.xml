@@ -13,33 +13,21 @@
         android:layout_height="wrap_content"
         android:hint="Username"/>
 
-<com.google.android.material.textfield.TextInputLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:passwordToggleEnabled="true">
-
 
     <EditText
         android:id="@+id/Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:background="@color/white"
         android:inputType="textPassword"/>
-</com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
     <EditText
         android:id="@+id/Password2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Confirm Password"
-        android:background="@color/white"
         android:inputType="textPassword"/>
-    </com.google.android.material.textfield.TextInputLayout>
+
 
     <EditText
         android:id="@+id/Name"

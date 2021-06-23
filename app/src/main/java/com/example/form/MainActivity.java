@@ -11,9 +11,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    EditText eUsername,ePassword,ePassword2,eName,eAddress,eStatus;
-    Button bRegister, bLogin;
-    RadioGroup rGender;
+    EditText Username,Password,Password2,Name,Address,Status;
+    Button Register, Login;
+    RadioGroup Gender;
     DatabaseHelper db;
 
     @Override
@@ -21,56 +21,50 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db = new DatabaseHelper(this);
-        eUsername = (EditText)findViewById(R.id.Username);
-        ePassword =(EditText)findViewById(R.id.Password);
-        ePassword2 =(EditText)findViewById(R.id.Password2);
-        eName = (EditText)findViewById(R.id.Name);
-        eAddress =(EditText)findViewById(R.id.Address);
-        eStatus = (EditText)findViewById(R.id.Status) ;
-        rGender =(RadioGroup)findViewById(R.id.Gender);
-        bRegister =(Button)findViewById(R.id.Register);
-        bLogin=(Button)findViewById(R.id.Login);
-
-        bLogin.setOnClickListener(new View.OnClickListener() {
+        Username = (EditText)findViewById(R.id.Username);
+        Password =(EditText)findViewById(R.id.Password);
+        Password2 =(EditText)findViewById(R.id.Password2);
+        Name = (EditText)findViewById(R.id.Name);
+        Address =(EditText)findViewById(R.id.Address);
+        Status = (EditText)findViewById(R.id.Status) ;
+        Gender =(RadioGroup)findViewById(R.id.Gender);
+        Register =(Button)findViewById(R.id.Register);
+        Login=(Button)findViewById(R.id.Login);
+        Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Login.class);
                 startActivity(intent);
             }
         });
-        bRegister.setOnClickListener(new View.OnClickListener() {
+        Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sUsername = eUsername.getText().toString();
-                String sPassword = ePassword.getText().toString();
-                String sPassword2 = ePassword2.getText().toString();
-                String sName = eName.getText().toString();
-                String sAddress = eAddress.getText().toString();
-                String sStatus = eStatus.getText().toString();
+                String UsernameValue = Username.getText().toString();
+                String PasswordValue = Password.getText().toString();
+                String Password2Value = Password2.getText().toString();
+                String NameValue = Name.getText().toString();
+                String AddressValue = Address.getText().toString();
+                String StatusValue = Status.getText().toString();
                 //Radio Button inserting
-                RadioButton sGender = findViewById(rGender.getCheckedRadioButtonId());
+                RadioButton sGender = findViewById(Gender.getCheckedRadioButtonId());
                 String GenderValue = sGender.getText().toString();
                 //fill up fields
-                if (sUsername.equals("")||sPassword.equals("")||sPassword2.equals("")||sName.equals("")||sAddress.equals("")||GenderValue.equals("")||sStatus.equals("")){
+                if (UsernameValue.equals("")||PasswordValue.equals("")||Password2Value.equals("")||NameValue.equals("")||AddressValue.equals("")||GenderValue.equals("")||StatusValue.equals("")){
                     Toast.makeText(getApplicationContext(),"Field are empty",Toast.LENGTH_SHORT).show();
                 }
                 //inserting fields
                 else{
                     //inserting password and confirm password
-                    if (sPassword.equals(sPassword2)){
+                    if (PasswordValue.equals(Password2Value)){
                         //confirming Username
-                        Boolean chkUsername = db.chkUsername(sUsername);
+                        Boolean chkUsername = db.chkUsername(UsernameValue);
                         //inserting user
                         if (chkUsername == true){
-                            Boolean insert = db.insert(sUsername,sPassword,sName,sAddress,GenderValue,sStatus);
+                            Boolean insert = db.insert(UsernameValue,PasswordValue,NameValue,AddressValue,GenderValue,StatusValue);
                             if(insert==true){
                                 Toast.makeText(getApplicationContext(),"Register Successfully",Toast.LENGTH_SHORT).show();
-                                eUsername.setText("");
-                                ePassword.setText("");
-                                ePassword2.setText("");
-                                eName.setText("");
-                                eAddress.setText("");
-                                eStatus.setText("");
+
                             }
                         }
 

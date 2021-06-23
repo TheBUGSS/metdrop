@@ -24,24 +24,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
     //inserting database REGISTER
-    public boolean insert (String sUsername , String sPassword, String sName, String sAddress, String GenderValue, String sStatus){
+    public boolean insert (String UsernameValue , String PasswordValue, String NameValue, String AddressValue, String GenderValue, String StatusValue){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("Username",sUsername);
-        contentValues.put("Password",sPassword);
-        contentValues.put("Name",sName);
-        contentValues.put("Address",sAddress);
+        contentValues.put("Username",UsernameValue);
+        contentValues.put("Password",PasswordValue);
+        contentValues.put("Name",NameValue);
+        contentValues.put("Address",AddressValue);
         contentValues.put("Gender", GenderValue);
-        contentValues.put("Status",sStatus);
+        contentValues.put("Status",StatusValue);
         long ins = db.insert("user",null,contentValues);
         if(ins==-1) return false;
         else  return true;
 
     }
     //checking if Username exists REGISTER
-    public Boolean chkUsername(String sUsername){
+    public Boolean chkUsername(String UsernameValue){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from user where Username=?",new String[]{sUsername});
+        Cursor cursor = db.rawQuery("select * from user where Username=?",new String[]{UsernameValue});
         if(cursor.getCount()>0) return false;
         else return true;
     }
